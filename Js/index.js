@@ -90,9 +90,70 @@ function listarTodos(){
     exibirFilmes(filmes);
 }
 
-//chama a funcao para listar todos os filmes no carregamento da pagina
+function atualizarResumo(){
 
+    let divTotal = document.querySelector('#quantidade-filmes');
+    let divMedia = document.querySelector('#media-avaliacoes');
+    let divGeneros = document.querySelector('#contagem-generos');
+
+    divTotal.textContent = filmes.length;
+
+    let qtdePorGenero = {
+        animacao: 0,
+        drama: 0,
+        ficcaoCientifica: 0,
+        terror: 0
+    }
+
+    let somaNotas = 0;
+    for(let i = 0; i < filmes.length; i++){
+        somaNotas += filmes[i].nota;
+
+        if(filmes[i].genero === 'Animação'){
+            qtdePorGenero.animacao++;
+        }
+
+        if(filmes[i].genero === 'Drama'){
+            qtdePorGenero.drama++;
+        }
+
+        if(filmes[i].genero === 'Ficção Científica'){
+            qtdePorGenero.ficcaoCientifica++;
+        }
+
+        if(filmes[i].genero === 'Terror'){
+            qtdePorGenero.terror++;
+        }
+    }
+
+    console.log(somaNotas, qtdePorGenero.animacao);
+
+   
+
+    let media = filmes.length > 0 ? somaNotas / filmes.length : 0;
+
+    divMedia.textContent = media.toFixed(1);
+
+    let badgeAnimacao = document.createElement('span');
+    badgeAnimacao.className = 'badge text-bg-primary';
+    badgeAnimacao.textContent = `Animação ${qtdePorGenero.animacao}`;
+
+    let badgeDrama = document.createElement('span');
+    badgeDrama.className = 'badge text-bg-success';
+    badgeDrama.textContent = `Drama ${qtdePorGenero.drama}`;
+
+    divGeneros.appendChild(badgeAnimacao);
+    divGeneros.appendChild(badgeDrama);
+
+}
+
+
+
+//chama a funcao para listar todos os filmes no carregamento da pagina
 listarTodos();
+
+// Atualiza os dados de resumo no carregamento da página
+atualizarResumo();
 
 
 
