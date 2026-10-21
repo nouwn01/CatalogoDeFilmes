@@ -35,6 +35,9 @@ function exibirFilmes(listaFilmes){
     let areaFilmes = document.querySelector('#lista-filmes');
     let mensagem = document.querySelector('#mensagem-listagem');
 
+    areaFilmes.innerHTML = '';
+    mensagem.classList.add('d-none');
+
     if(listaFilmes.length === 0){
         mensagem.textContent = 'Nunhum filme encontrado.';
         mensagem.classList.remove('d-none');
@@ -154,6 +157,25 @@ function atualizarResumo(){
     divGeneros.appendChild(badgeDrama);
     divGeneros.appendChild(badgeFiccao);
     divGeneros.appendChild(badgeTerror);
+
+
+    function buscarFilmePorTitulo(){
+        let tituloBuscado = document.querySelector('#busca-titulo').value;
+
+        tituloBuscado = tituloBuscado.trim().toLowerCase();
+
+        let resultado = [];
+
+        for(let i = 0; i < filmes.length; i++){
+            if(filmes[i].titulo.trim().toLowerCase().includes(tituloBuscado)){
+                resultado.push(filmes[i]);
+            }
+        }
+
+        exibirFilmes(resultado);
+        
+    }
+    document. querySelector('#botao-buscar').addEventListener('click', buscarFilmePorTitulo)
 
 }
 
