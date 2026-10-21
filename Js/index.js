@@ -142,8 +142,18 @@ function atualizarResumo(){
     badgeDrama.className = 'badge text-bg-success';
     badgeDrama.textContent = `Drama ${qtdePorGenero.drama}`;
 
+    let badgeFiccao = document.createElement('span');
+    badgeFiccao.className = 'badge text-bg-secondary';
+    badgeFiccao.textContent = `Ficção Científica ${qtdePorGenero.ficcaoCientifica}`;
+
+    let badgeTerror = document.createElement('span');
+    badgeTerror.className = 'badge text-bg-warning';
+    badgeTerror.textContent = `Terror ${qtdePorGenero.terror}`;
+
     divGeneros.appendChild(badgeAnimacao);
     divGeneros.appendChild(badgeDrama);
+    divGeneros.appendChild(badgeFiccao);
+    divGeneros.appendChild(badgeTerror);
 
 }
 
