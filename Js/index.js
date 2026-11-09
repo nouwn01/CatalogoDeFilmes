@@ -158,27 +158,48 @@ function atualizarResumo(){
     divGeneros.appendChild(badgeFiccao);
     divGeneros.appendChild(badgeTerror);
 
+}
 
-    function buscarFilmePorTitulo(){
-        let tituloBuscado = document.querySelector('#busca-titulo').value;
+function buscarFilmePorTitulo(){
+    let tituloBuscado = document.querySelector('#busca-titulo').value;
 
-        tituloBuscado = tituloBuscado.trim().toLowerCase();
+    tituloBuscado = tituloBuscado.trim().toLowerCase();
 
+    let resultado = [];
+
+    for(let i = 0; i < filmes.length; i++){
+        if(filmes[i].titulo.trim().toLowerCase().includes(tituloBuscado)){
+            resultado.push(filmes[i]);
+        }
+    }
+
+    exibirFilmes(resultado);
+    
+}
+
+function filtrarFilmesPorGenero(){
+    let generoSelecionado = document.querySelector('#filtro-genero').value;
+    
+    if(genero === 'Todos'){
+        listarTodos(filmes);
+    }else{
         let resultado = [];
 
+        // varrer a lista para encotnrar os filmes do genero filrado
         for(let i = 0; i < filmes.length; i++){
-            if(filmes[i].titulo.trim().toLowerCase().includes(tituloBuscado)){
+            if(filmes[i].genero === generoSelecionado){
                 resultado.push(filmes[i]);
             }
         }
 
         exibirFilmes(resultado);
-        
     }
-    document. querySelector('#botao-buscar').addEventListener('click', buscarFilmePorTitulo)
-
 }
+    
 
+document.querySelector('#botao-buscar').addEventListener('click', buscarFilmePorTitulo);
+document.querySelector('#botao-todos').addEventListener('click', listarTodos);
+document.querySelector('#botao-filtrar').addEventListener('click', filtrarFilmesPorGenero);
 
 
 //chama a funcao para listar todos os filmes no carregamento da pagina
