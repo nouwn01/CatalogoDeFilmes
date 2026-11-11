@@ -100,6 +100,7 @@ function atualizarResumo(){
     let divGeneros = document.querySelector('#contagem-generos');
 
     divTotal.textContent = filmes.length;
+    divGeneros.innerHTML = '';
 
     let qtdePorGenero = {
         animacao: 0,
@@ -213,7 +214,42 @@ function mostrarMelhorAvaliado(){
     exibirFilmes([filmeMelhorAvaliado]);
 }
 
+function cadastrarFilme(event){
+    event.preventDefault();
 
+    // obter os valores informados
+    let titulo = document.querySelector('#titulo').value;
+    let genero = document.querySelector('#genero').value;
+    let ano = document.querySelector('#ano').value;
+    let nota = document.querySelector('#nota').value;
+
+    ano = parseFloat(ano);
+    nota = parseFloat(nota);
+
+    // criar o objeto de filme
+    let novoFilme = {
+        titulo: titulo,
+        genero: genero,
+        ano: ano,
+        nota: nota
+    }
+
+    console.log(novoFilme);
+    // salvar novo objeto na lista de filmes
+    filmes.push(novoFilme);
+
+    // atualizar a visualização da página
+    listarTodos(filmes);
+    atualizarResumo();
+
+    // mostrar mensagem de sucesso
+    event.target.reset();
+
+    let mensagem = document.querySelector('#mensagem-cadastro');
+    mensagem.textContent = `Filme ${novoFilme.titulo} cadastrado com sucesso!`
+    mensagem.classList.remove('d-none');
+
+}
 
 
 document.querySelector('#botao-buscar').addEventListener('click', buscarFilmePorTitulo);
@@ -221,6 +257,7 @@ document.querySelector('#botao-todos').addEventListener('click', listarTodos);
 document.querySelector('#botao-filtrar').addEventListener('click', filtrarFilmesPorGenero);
 document.querySelector('#botao-melhor').addEventListener('click', mostrarMelhorAvaliado);
 
+document.querySelector('#form-filme').addEventListener('submit', cadastrarFilme);
 
 //chama a funcao para listar todos os filmes no carregamento da pagina
 listarTodos();
