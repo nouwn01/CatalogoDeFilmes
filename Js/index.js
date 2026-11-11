@@ -195,11 +195,31 @@ function filtrarFilmesPorGenero(){
         exibirFilmes(resultado);
     }
 }
-    
+   
+function mostrarMelhorAvaliado(){
+    // varrer a lista de filmes para encontrar qual filme que possui
+    // a melhor avaliado
+
+    let filmeMelhorAvaliado = filmes[0];
+
+    for(let i = 0; i < filmes.length; i++){
+        if(filmes[i].nota > filmeMelhorAvaliado.nota){
+            filmeMelhorAvaliado = filmes[i];
+        }
+    }
+
+    console.log(filmeMelhorAvaliado);
+
+    exibirFilmes([filmeMelhorAvaliado]);
+}
+
+
+
 
 document.querySelector('#botao-buscar').addEventListener('click', buscarFilmePorTitulo);
 document.querySelector('#botao-todos').addEventListener('click', listarTodos);
 document.querySelector('#botao-filtrar').addEventListener('click', filtrarFilmesPorGenero);
+document.querySelector('#botao-melhor').addEventListener('click', mostrarMelhorAvaliado);
 
 
 //chama a funcao para listar todos os filmes no carregamento da pagina
@@ -207,7 +227,3 @@ listarTodos();
 
 // Atualiza os dados de resumo no carregamento da página
 atualizarResumo();
-
-
-
-
